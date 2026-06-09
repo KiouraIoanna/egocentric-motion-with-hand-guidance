@@ -88,7 +88,7 @@ For the **dataset**:
 We used videos from the UniEgoMotion validation dataset. These can be obtained by gaining access to the EgoExo4D dataset (https://ego-exo4d-data.org). Once credentials are acquired, you can run the following command in the root folder to see the names of all videos in the validation dataset:
 
 ```
-python3 -c "import torch; [print(k) for k in sorted(torch.load('ee4d_motion_uniegomotion/uniegomotion/ee_val.pt', map_location='cpu', weights_only=False))]"
+python3 -c "import torch; print('\n'.join(sorted({k.split('___')[0] for k in torch.load('ee4d_motion_uniegomotion/uniegomotion/ee_val.pt', map_location='cpu', weights_only=False)})))"
 ```
 
 You can pick the videos you want. Afterwards, you need to install the CLI downloader:
@@ -136,6 +136,15 @@ This will download a folder of videos. The one we use is in the frame_aligned_vi
 
 
 ## Data Preprocessing
-As you probably noticed when checking the videos in the validation dataset of UniEgoMotion, they are not contained as a whole. Specific ranges of frames have been preserved, while others have been deemed inadequate. Therefore, we need to only use these specific ranges when running our experiments too. UniEgoMotion also runs on 80-frame clips, so we need to divide these ranges in 80-frame clips as well. Then we need to run Dyn-HaMR on them. This is what the cut_and_run_dynhamr.py script does, while also checking which videos have 80 valid Dyn-HaMR frames for both hands. The videos kept in the cooking_vids_uni/videos folder are the ones with 80 valid frames for both hands. Dyn-HaMR results however are kept for all checked clips regardless of valid frames. To run for your video, edit the name in cut_and_run_dynhamr.sbatch and run from the repo root:
+The videos in the validation dataset of UniEgoMotion are not contained as a whole. Specific ranges of frames have been preserved, while others have been deemed inadequate. To inspect for your selected videos which frames have been selected, you can run:
+
+```
+python run/inspect_val_frames.py \
+       --ee_val /path/to/ee4d_motion_uniegomotion/uniegomotion/ee_val.pt \
+       --take <YOUR_VIDEO_NAME>
+```
+
+We must only use these specific ranges when running our experiments. UniEgoMotion also runs on 80-frame clips, so we need to divide these ranges in 80-frame clips as well. Then we need to run Dyn-HaMR on them. This is what the cut_and_run_dynhamr.py script does, while also checking which videos have 80 valid Dyn-HaMR frames for both hands. The videos kept in the cooking_vids_uni/videos folder are the ones with 80 valid frames for both hands. Dyn-HaMR results however are kept for all checked clips regardless of valid frames. To run for your video, edit the name in cut_and_run_dynhamr.sbatch and run from the repo root:
 
 ```sbatch Uniegomotion/run/cut_and_run_dynhamr.sbatch```
+
