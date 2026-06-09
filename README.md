@@ -57,7 +57,7 @@ This project relies on the UniEgoMotion and Dyn-HaMR environments and external
 assets (SMPL-X body model, Ego-Exo4D videos, pretrained checkpoints) that are
 not included in the repository. 
 
-For **UniEgoMotion** set up:
+### **UniEgoMotion** set up:
 1. Run the following: 
 
 ```
@@ -79,11 +79,32 @@ We had some issues with the blendify package, which we ended up installing on it
 
 4. Create a new directory called UniEgoMotion/exp/ and follow this link https://huggingface.co/datasets/chaitanya100100/uniegomotion/tree/main to download the pretrained model. Place it in the new directory.
 
+### MediaPipe (2D wrist detection) set up
 
-For **Dyn-HaMR** set up:
+MediaPipe is installed via pip into the same `uem` conda environment used by
+UniEgoMotion:
+
+​```bash
+conda activate uem
+pip install mediapipe==0.10.35
+​```
+
+We use the **MediaPipe Tasks** Hand Landmarker (`mediapipe.tasks.python.vision`).
+The model bundle is downloaded separately from Google's model storage:
+
+​```bash
+wget -O /tmp/hand_landmarker.task \
+  https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task
+​```
+
+2D wrist detections are then extracted with
+`my_coord_attempt/extract_2d_wrist_guidance.py`, keeping only the wrist landmark
+(landmark 0) per hand. Tested with `mediapipe==0.10.35` on Python 3.10.
+
+### **Dyn-HaMR** set up:
 
 
-For the **dataset**:
+### The **dataset**:
 
 We used videos from the UniEgoMotion validation dataset. These can be obtained by gaining access to the EgoExo4D dataset (https://ego-exo4d-data.org). Once credentials are acquired, you can run the following command in the root folder to see the names of all videos in the validation dataset:
 
@@ -136,7 +157,7 @@ This will download a folder of videos. The one we use is in the frame_aligned_vi
 
 
 ## Data Preprocessing
-The videos in the validation dataset of UniEgoMotion are not contained as a whole. Specific ranges of frames have been preserved, while others have been deemed inadequate. To inspect for your selected videos which frames have been selected, you can run:
+The videos in the validation dataset of UniEgoMotion are not contained as a whole. Specific ranges of frames have been preserved, while others have been deemed inadequate. To inspect for your selected videos which frames have been selected, you can run in the UniEgoMotion folder:
 
 ```
 python run/inspect_val_frames.py \
@@ -148,3 +169,4 @@ We must only use these specific ranges when running our experiments. UniEgoMotio
 
 ```sbatch Uniegomotion/run/cut_and_run_dynhamr.sbatch```
 
+## Running our implementation
