@@ -55,14 +55,27 @@ libraries (`Dyn-HaMR/third-party`, `Dyn-HaMR/test`) are excluded via
 
 This project relies on the UniEgoMotion and Dyn-HaMR environments and external
 assets (SMPL-X body model, Ego-Exo4D videos, pretrained checkpoints) that are
-not included in the repository. See the upstream
-[UniEgoMotion](https://github.com/...) and
-[Dyn-HaMR](https://github.com/ZhengdiYu/Dyn-HaMR) instructions for installing
-their respective conda environments and downloading weights.
+not included in the repository. 
 
-## Acknowledgements
+For UniEgoMotion set up:
+1. Create and activate conda environment: 
 
-This repository vendors the [Dyn-HaMR](https://github.com/ZhengdiYu/Dyn-HaMR)
-pipeline under its original license. UniEgoMotion and MediaPipe are used as
-described in the report.
+```
+conda create --name uem python=3.10
+conda activate uem
+
+# Install Pytorch with your own CUDA version
+pip3 install torch --index-url https://download.pytorch.org/whl/cu118
+
+pip3 install pytorch_lightning==2.4.0
+pip3 install -r requirements.txt
+```
+
+2. Download SMPL-X model here https://smpl-x.is.tue.mpg.de/ and set a proper path in get_smpl function in UniEgoMotion/dataset/smpl_utils.py
+
+3. From DATASET.md follow the second link to download the processed and filtered EE4D-Motion data, DINOv2 features, and other metadata for running UniEgoMotion.
+
+4. Create a new directory called UniEgoMotion/exp/ and follow this link https://huggingface.co/datasets/chaitanya100100/uniegomotion/tree/main to download the pretrained model. Place it in the new directory.
+
+
 
