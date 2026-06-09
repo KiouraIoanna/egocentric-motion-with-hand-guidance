@@ -182,3 +182,27 @@ We must only use these specific ranges when running our experiments. UniEgoMotio
 ```sbatch Uniegomotion/run/cut_and_run_dynhamr.sbatch```
 
 ## Running our implementation
+
+### Guidance with MediaPipe
+
+#First run MediaPipe on the desired preprocessed video as follows
+
+You can then use the sbatch file my_coord_attempt/run_guided_mediapipe.sh chosing your vidoe after the flag --example. It must have a format like: georgiatech_bike_06_10___4314___6195:240
+
+### Guidance with Dyn-HaMR and refinement with MediaPipe
+
+Run the DynHaMR on the desired video
+
+```
+python run_opt.py \
+  data=video_driod \
+  run_opt=True \
+  data.seq=<clip_name> \
+  is_static=False \
+  data.root=/work/courses/digital_human/team7/cooking_vids_uni
+```
+
+clip name has a similar format to "indiana_cooking_09_2___4314___6195st0_uem80"
+
+You can then use the sbatch file my_coord_attempt/run_merged_test.sh chosing your vidoe after the flag --example. It must have a format like: georgiatech_bike_06_10___4314___6195:240
+
