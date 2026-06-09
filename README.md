@@ -217,3 +217,20 @@ clip name has a similar format to "indiana_cooking_09_2___4314___6195st0_uem80"
 
 You can then use the sbatch file my_coord_attempt/run_merged.sh chosing your vidoe after the flag --example. It must have a format like: georgiatech_bike_06_10___4314___6195:240
 
+## Output example
+
+For the clip indiana_cooking_09_2___10257___11112 we get the following clips:
+
+MediaPipe only guidance:
+
+https://github.com/user-attachments/assets/59d03ceb-407c-4f96-a9d9-36e1c3f2a16f
+
+(Gray=GT, Blue=UniEgoMotion, Yellow=Ours)
+
+Dyn-HaMR + MediaPipe guidance:
+
+https://github.com/user-attachments/assets/8980ebf5-0234-4a4e-89d0-5517fef85273
+
+(Gray=GT, Blue=UniEgoMotion, Yellow=Ours)
+
+
