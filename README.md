@@ -193,7 +193,7 @@ You can then use the sbatch file my_coord_attempt/run_guided_mediapipe.sh chosin
 
 ### Guidance with Dyn-HaMR and refinement with MediaPipe
 
-Run the DynHaMR on the desired video
+Run the DynHaMR on the desired video as follows
 
 ```
 python run_opt.py \
