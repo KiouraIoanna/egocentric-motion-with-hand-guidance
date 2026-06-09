@@ -42,7 +42,6 @@ libraries (`Dyn-HaMR/third-party`, `Dyn-HaMR/test`) are excluded via
 | `my_coord_attempt/eval_root_relative.py` | Post-hoc world / root-relative / Procrustes wrist-error report |
 | `my_coord_attempt/fix_projection_errors.py` | Recompute projection-error weights with offset/intrinsic corrections |
 | `UniEgoMotion/run/cut_and_run_dynhamr.py` | Extract 80-frame clips from Ego-Exo4D takes and run Dyn-HaMR |
-| `UniEgoMotion/run/extract_img_feats.py` | DINOv2 image features for UniEgoMotion conditioning |
 
 ## Method summary
 
