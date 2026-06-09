@@ -49,6 +49,12 @@ PYTHONPATH=. python /work/courses/digital_human/team7/my_coord_attempt/run_merge
   --diffusion_wrist_guidance_strength 0.05 \
   --diffusion_wrist_guidance_start_frac 0.7 \
   --w_acc 0.1 \
+  --use_projection_error_guidance \
+  --projection_error_dir /work/courses/digital_human/team7/my_coord_attempt/projection_errors \
+  --proj_3d_good 0.05 \
+  --proj_3d_bad 0.20 \
+  --proj_px_good 30 \
+  --proj_px_bad 150 \
   CONFIG ./config/uem.yaml \
   TRAIN.EXP_PATH ./exp/uem_v4b_dinov2/ \
   MODEL.CKPT_PATH last_ckpt
