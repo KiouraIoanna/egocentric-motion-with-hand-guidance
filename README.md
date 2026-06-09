@@ -41,7 +41,9 @@ libraries (`Dyn-HaMR/third-party`, `Dyn-HaMR/test`) are excluded via
 | `my_coord_attempt/run_ablation_dyn_hamr.sbatch` | Multi-arm ablation (Dyn-HaMR 3D, MediaPipe 2D, finger pose) |
 | `my_coord_attempt/eval_root_relative.py` | Post-hoc world / root-relative / Procrustes wrist-error report |
 | `my_coord_attempt/fix_projection_errors.py` | Recompute projection-error weights with offset/intrinsic corrections |
+| `my_coord_attempt/extract_2d_wrist_guidance.py` | Run MediaPipe Hand Landmarker on samples |
 | `UniEgoMotion/run/cut_and_run_dynhamr.py` | Extract 80-frame clips from Ego-Exo4D takes and run Dyn-HaMR |
+
 
 ## Method summary
 
@@ -184,11 +186,19 @@ We must only use these specific ranges when running our experiments. UniEgoMotio
 
 ## Running our implementation
 
+First run the MediaPipe Hand Landmarker over the extracted 80-frame clips (`*_uem80.mp4`) to produce one `.npz` of 2D wrist detections per clip:
+
+```
+conda activate uem
+python my_coord_attempt/extract_2d_wrist_guidance.py \
+  --video_dir cooking_vids_uni/videos \
+  --out_dir   cooking_vids_uni/hand_guidance_2d \
+  --model     /tmp/hand_landmarker.task
+```
+
 ### Guidance with MediaPipe
 
-# !!First run MediaPipe on the desired preprocessed video as follows!!
-
-You can then use the sbatch file my_coord_attempt/run_guided_mediapipe.sh chosing your vidoe after the flag --example. It must have a format like: georgiatech_bike_06_10___4314___6195:240
+You can use the sbatch file my_coord_attempt/run_guided_mediapipe.sh chosing your vidoe after the flag --example. It must have a format like: georgiatech_bike_06_10___4314___6195:240
 
 ### Guidance with Dyn-HaMR and refinement with MediaPipe
 
