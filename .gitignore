@@ -1,0 +1,105 @@
+# ─────────────────────────────────────────────────────────────
+# Large data / model dirs — never commit (≈95 GB total)
+# ─────────────────────────────────────────────────────────────
+# dataset (36G)
+ee4d_motion_uniegomotion/
+# extracted frames, dynhamr outputs, hand_guidance (9G)
+cooking_vids_uni/
+# SMPL-X body model files (2G)
+smplx/
+# third-party (277M)
+Hand-BMC-pytorch/
+
+# Stray Windows-path test dir accidentally created
+C:\\Users\\ayshe\\ego4d_test/
+
+# Keep Dyn-HaMR / UniEgoMotion *code* but drop their heavy artifacts
+Dyn-HaMR/outputs/
+Dyn-HaMR/_DATA/
+# vendored third-party libraries (DROID-SLAM, HaMeR, ViPE) — ~5.4k files, large binaries
+Dyn-HaMR/third-party/
+# vendored test suite (4.5k files) and stray data copy — not our work
+Dyn-HaMR/test/
+Dyn-HaMR/_DATA copy/
+# large demo / asset binaries
+Dyn-HaMR/assets/
+# the conda/venv inside the repo
+Dyn-HaMR/.dynhamr/
+# checkpoints, eval npz, rendered videos
+UniEgoMotion/exp/
+UniEgoMotion/logs/
+my_coord_attempt/projection_errors/
+my_coord_attempt/projection_errors_fixed/
+my_coord_attempt/*.png
+my_coord_attempt/*.pdf
+
+
+# Drop previous versions of final code
+my_coord_attempt/run_guidance_camspace.py
+my_coord_attempt/run_camspace.sbatch
+my_coord_attempt/run_camspace_all.sbatch
+my_coord_attempt/run_guidance_camspace_v2.py
+my_coord_attempt/run_camspace_all_v2.sbatch
+UniEgoMotion/run/run_with_guidance.py
+UniEgoMotion/run/run_with_guidance_a.py
+UniEgoMotion/run/run_with_guidance.sbatch
+UniEgoMotion/run/run_with_guidance_a.sh
+UniEgoMotion/run/recon_run.py
+UniEgoMotion/run/recon_run.sbatch
+UniEgoMotion/run/recon_run_test.py
+UniEgoMotion/run_recon_09_2.sh
+UniEgoMotion/save_uem_preds.sh
+UniEgoMotion/run/cut_and_run_dynhamr_a.sbatch
+# ─────────────────────────────────────────────────────────────
+# Heavy artifact file types (anywhere)
+# ─────────────────────────────────────────────────────────────
+*.mp4
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.blend
+*.npz
+*.npy
+*.pkl
+*.pt
+*.pt.*
+*.pth
+*.ckpt
+*.obj
+*.ply
+
+# Allow lightweight figures you DO want tracked (un-ignore explicitly):
+# !docs/figures/*.png
+
+# ─────────────────────────────────────────────────────────────
+# Logs / scratch
+# ─────────────────────────────────────────────────────────────
+*.out
+*.err
+logs/
+**/logs/
+.quota_test
+test.txt
+test2.txt
+
+# ─────────────────────────────────────────────────────────────
+# Python
+# ─────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+*.so
+
+# ─────────────────────────────────────────────────────────────
+# Editor / OS / tooling
+# ─────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+.DS_Store
+.claude/
+slurm-*.out
