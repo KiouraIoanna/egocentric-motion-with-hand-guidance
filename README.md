@@ -85,25 +85,18 @@ MediaPipe is installed via pip into the same `uem` conda environment used by
 UniEgoMotion:
 
 ```
-bash
 conda activate uem
 pip install mediapipe==0.10.35
 ```
 
-​```
-bash
-conda activate uem
-pip install mediapipe==0.10.35
-​```
-
 We use the **MediaPipe Tasks** Hand Landmarker (`mediapipe.tasks.python.vision`).
 The model bundle is downloaded separately from Google's model storage:
 
-​```
-bash
+```
 wget -O /tmp/hand_landmarker.task \
   https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task
-​```
+```
+
 
 2D wrist detections are then extracted with
 `my_coord_attempt/extract_2d_wrist_guidance.py`, keeping only the wrist landmark
