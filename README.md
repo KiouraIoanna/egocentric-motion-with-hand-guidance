@@ -84,6 +84,12 @@ We had some issues with the blendify package, which we ended up installing on it
 MediaPipe is installed via pip into the same `uem` conda environment used by
 UniEgoMotion:
 
+```
+bash
+conda activate uem
+pip install mediapipe==0.10.35
+```
+
 ​```
 bash
 conda activate uem
