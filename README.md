@@ -57,7 +57,7 @@ This project relies on the UniEgoMotion and Dyn-HaMR environments and external
 assets (SMPL-X body model, Ego-Exo4D videos, pretrained checkpoints) that are
 not included in the repository. 
 
-For UniEgoMotion set up:
+For **UniEgoMotion** set up:
 1. Create and activate conda environment: 
 
 ```
@@ -78,4 +78,50 @@ pip3 install -r requirements.txt
 4. Create a new directory called UniEgoMotion/exp/ and follow this link https://huggingface.co/datasets/chaitanya100100/uniegomotion/tree/main to download the pretrained model. Place it in the new directory.
 
 
+For **Dyn-HaMR** set up:
 
+
+For the **dataset**:
+
+We used videos from the UniEgoMotion validation dataset. These can be obtained by gaining access to the EgoExo4D dataset (https://ego-exo4d-data.org). Once credentials are acquired, you can run the following command in the root folder to see the names of all videos in the validation dataset:
+
+```
+python3 -c "import torch; [print(k) for k in sorted(torch.load('ee4d_motion_uniegomotion/uniegomotion/ee_val.pt', map_location='cpu', weights_only=False))]"
+```
+
+You can pick the videos you want. Afterwards, you need to install the CLI downloader:
+```pip install ego4d```
+And configure your credentials with:
+```pip install awscli
+aws configure```
+Now you need to find the uids of your selected videos:
+```
+python - <<'PY'   
+import json                                                      
+p="/Users/ioannakioura/Documents/ETH Courses/Digital Humans/Project/ego4d/takes.json"
+
+with open(p, "r") as f:
+    takes = json.load(f)
+
+for t in takes:
+    if t["take_name"] == <YOUR_VIDEO_NAME>:  
+        print("TAKE UID:", t["take_uid"])
+        print("ROOT DIR:", t["root_dir"])
+        print("DURATION:", t.get("duration_sec"))
+        print("BEST EXO:", t.get("best_exo"))
+        print()
+PY 
+```
+
+And finally you can download the egocentric video as follows:
+```
+egoexo \          
+  -o <YOU_OUTPUT_DIR> \
+  --parts takes \
+  --uids <YOUR_VIDEO_UID> \
+  --views ego
+  ```
+This will download a folder of videos. The one we use is in the frame_aligned_videos/ folder and will be called aria01_214-1.mp4. You will need to create a new directory in the repo root titled cooking_vids_uni/videos/ to place this.
+
+
+## Data Preprocessing
