@@ -104,6 +104,17 @@ wget -O /tmp/hand_landmarker.task \
 
 ### **Dyn-HaMR** set up:
 
+main link: https://github.com/ZhengdiYu/Dyn-HaMR
+
+Inside Dyn-HaMR create the evironement with the \scripts: 
+
+```
+source install_pip.sh
+```
+or from conda: 
+```
+source install_conda.sh
+```
 
 ### The **dataset**:
 
