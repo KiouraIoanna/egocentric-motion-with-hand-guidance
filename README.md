@@ -90,11 +90,18 @@ python3 -c "import torch; [print(k) for k in sorted(torch.load('ee4d_motion_unie
 ```
 
 You can pick the videos you want. Afterwards, you need to install the CLI downloader:
+
 ```pip install ego4d```
+
 And configure your credentials with:
-```pip install awscli
-aws configure```
+
+```
+pip install awscli
+aws configure
+```
+
 Now you need to find the uids of your selected videos:
+
 ```
 python - <<'PY'   
 import json                                                      
@@ -114,6 +121,7 @@ PY
 ```
 
 And finally you can download the egocentric video as follows:
+
 ```
 egoexo \          
   -o <YOU_OUTPUT_DIR> \
@@ -121,6 +129,7 @@ egoexo \
   --uids <YOUR_VIDEO_UID> \
   --views ego
   ```
+
 This will download a folder of videos. The one we use is in the frame_aligned_videos/ folder and will be called aria01_214-1.mp4. You will need to create a new directory in the repo root titled cooking_vids_uni/videos/ to place this.
 
 
