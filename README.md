@@ -185,7 +185,7 @@ We must only use these specific ranges when running our experiments. UniEgoMotio
 
 ### Guidance with MediaPipe
 
-# First run MediaPipe on the desired preprocessed video as follows
+# !!First run MediaPipe on the desired preprocessed video as follows!!
 
 You can then use the sbatch file my_coord_attempt/run_guided_mediapipe.sh chosing your vidoe after the flag --example. It must have a format like: georgiatech_bike_06_10___4314___6195:240
 
