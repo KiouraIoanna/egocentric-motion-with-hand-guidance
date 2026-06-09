@@ -33,8 +33,10 @@ libraries (`Dyn-HaMR/third-party`, `Dyn-HaMR/test`) are excluded via
 
 | Script | Purpose |
 |---|---|
-| `my_coord_attempt/run_merged.py` | Main pipeline: UniEgoMotion + Dyn-HaMR/MediaPipe guidance + post-inference SMPL-X arm fit |
-| `my_coord_attempt/run_merged.sbatch` | SLURM job to run the full pipeline on a clip set |
+| `my_coord_attempt/run_guided_mediapipe.py` | Main pipeline: UniEgoMotion + MediaPipe guidance + post-inference MediaPipe |
+| `my_coord_attempt/run_guided_mediapipe.sbatch` | SLURM job to run the full pipeline on a clip set |
+| `my_coord_attempt/run_merged.py` | Main pipeline for Dyn-HaMR guidance: UniEgoMotion + Dyn-HaMR/MediaPipe guidance + post-inference SMPL-X arm fit |
+| `my_coord_attempt/run_merged.sbatch` | SLURM job to run the full pipeline (with Dyn-HaMR) on a clip set |
 | `my_coord_attempt/run_merged_ablation.py` | Pipeline variant exposing ablation flags + decomposed (root-relative / Procrustes) wrist metrics |
 | `my_coord_attempt/run_ablation_dyn_hamr.sbatch` | Multi-arm ablation (Dyn-HaMR 3D, MediaPipe 2D, finger pose) |
 | `my_coord_attempt/eval_root_relative.py` | Post-hoc world / root-relative / Procrustes wrist-error report |
@@ -204,5 +206,5 @@ python run_opt.py \
 
 clip name has a similar format to "indiana_cooking_09_2___4314___6195st0_uem80"
 
-You can then use the sbatch file my_coord_attempt/run_merged_test.sh chosing your vidoe after the flag --example. It must have a format like: georgiatech_bike_06_10___4314___6195:240
+You can then use the sbatch file my_coord_attempt/run_merged.sh chosing your vidoe after the flag --example. It must have a format like: georgiatech_bike_06_10___4314___6195:240
 
