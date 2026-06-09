@@ -58,7 +58,7 @@ assets (SMPL-X body model, Ego-Exo4D videos, pretrained checkpoints) that are
 not included in the repository. 
 
 For **UniEgoMotion** set up:
-1. Create and activate conda environment: 
+1. Run the following: 
 
 ```
 conda create --name uem python=3.10
@@ -70,6 +70,8 @@ pip3 install torch --index-url https://download.pytorch.org/whl/cu118
 pip3 install pytorch_lightning==2.4.0
 pip3 install -r requirements.txt
 ```
+
+We had some issues with the blendify package, which we ended up installing on its own, using a more recent version. If you have similar issues, run ```pip3 install -r requirements_no_blendify.txt``` and install a later version of blendify instead.
 
 2. Download SMPL-X model here https://smpl-x.is.tue.mpg.de/ and set a proper path in get_smpl function in UniEgoMotion/dataset/smpl_utils.py
 
@@ -105,7 +107,7 @@ Now you need to find the uids of your selected videos:
 ```
 python - <<'PY'   
 import json                                                      
-p="/Users/ioannakioura/Documents/ETH Courses/Digital Humans/Project/ego4d/takes.json"
+p="/path/to/takes.json"
 
 with open(p, "r") as f:
     takes = json.load(f)
@@ -134,3 +136,6 @@ This will download a folder of videos. The one we use is in the frame_aligned_vi
 
 
 ## Data Preprocessing
+As you probably noticed when checking the videos in the validation dataset of UniEgoMotion, they are not contained as a whole. Specific ranges of frames have been preserved, while others have been deemed inadequate. Therefore, we need to only use these specific ranges when running our experiments too. UniEgoMotion also runs on 80-frame clips, so we need to divide these ranges in 80-frame clips as well. Then we need to run Dyn-HaMR on them. This is what the cut_and_run_dynhamr.py script does, while also checking which videos have 80 valid Dyn-HaMR frames for both hands. The videos kept in the cooking_vids_uni/videos folder are the ones with 80 valid frames for both hands. Dyn-HaMR results however are kept for all checked clips regardless of valid frames. To run for your video, edit the name in cut_and_run_dynhamr.sbatch and run from the repo root:
+
+```sbatch Uniegomotion/run/cut_and_run_dynhamr.sbatch```
